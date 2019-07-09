@@ -56,7 +56,6 @@ plt.show()
 
 # plt.clf()
 #
-#
 # plt.plot(arr_rates,art_jsq,label="jsq")
 # plt.plot(arr_rates,art_jsq2,label="jsq_2")
 # plt.plot(arr_rates,art_jsq3,label="jsq_3")
