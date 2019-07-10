@@ -1,4 +1,4 @@
-import simulate
+import s_simulate
 import numpy as np
 import server
 import matplotlib.pyplot as plt
@@ -30,8 +30,8 @@ art_jsq2 = []
 # art_jsq3 = []
 for arr_rate in arr_rates:
     print(arr_rate)
-    res_jsq = simulate.simulate(arr_rate,dep_rate_exp,total_jobs,n_identical,num_server)
-    res_jsq2 = simulate.simulate(arr_rate,dep_rate_exp,total_jobs,n_identical,num_server,2)
+    res_jsq = s_simulate.simulate(arr_rate, dep_rate_exp, total_jobs, n_identical, num_server)
+    res_jsq2 = s_simulate.simulate(arr_rate, dep_rate_exp, total_jobs, n_identical, num_server, 2)
     # res_jsq3 = simulate.simulate(arr_rate,dep_rate_exp,total_jobs,n_identical,num_server,3)
     art_jsq.append(np.mean(res_jsq[throwaway:]))
     art_jsq2.append(np.mean(res_jsq2[throwaway:]))

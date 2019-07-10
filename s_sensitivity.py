@@ -1,4 +1,4 @@
-import simulate
+import s_simulate
 import numpy as np
 import server
 import matplotlib.pyplot as plt
@@ -25,8 +25,8 @@ total_jobs = 2**24
 y_art_jsq = []
 y_art_jsq2 = []
 
-y_art_jsq_master = simulate.simulate(arr_rate_exp, dep_rate_exp, total_jobs, n_identical, num_server)
-y_art_jsq2_master = simulate.simulate(arr_rate_exp, dep_rate_exp, total_jobs, n_identical, num_server, jsq_n)
+y_art_jsq_master = s_simulate.simulate(arr_rate_exp, dep_rate_exp, total_jobs, n_identical, num_server)
+y_art_jsq2_master = s_simulate.simulate(arr_rate_exp, dep_rate_exp, total_jobs, n_identical, num_server, jsq_n)
 
 print(len(y_art_jsq_master))
 print(len(y_art_jsq2_master))

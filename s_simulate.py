@@ -23,11 +23,11 @@ def next_inter_arrival_time(distribution, arr_rate_exp, std = 0.01):
         return np.random.exponential(1 / arr_rate_exp)
 
 
-def next_job_size(distribution, dep_rate_exp, std = 0.01):
-    if distribution == DISTRIBUTION_GAU:
-        return max(1/np.random.normal(dep_rate_exp,std),np.nextafter(0,1))
-    if distribution == DISTRIBUTION_EXP:
-        return np.random.exponential(1 / dep_rate_exp)
+def next_job_req(distribution, dep_rate_exp, std = 0.01):
+    # if distribution == DISTRIBUTION_GAU:
+    #     return max(1/np.random.normal(dep_rate_exp,std),np.nextafter(0,1))
+    # if distribution == DISTRIBUTION_EXP:
+    return [np.random.exponential(1 / dep_rate_exp)] * 2
 
 
 #UPDATE
@@ -72,7 +72,7 @@ def find_next_server_jsq(server_list):
 def n_identical(n = 2):
     server_list = []
     for i in range(n):
-        server_list.append(server.Server())
+        server_list.append(server.Server([1,1]))
     return server_list
 
 DISTRIBUTION_EXP = "exponential"
@@ -106,7 +106,7 @@ def simulate(arr_rate, dep_rate_exp, total_jobs, server_farm_init_func, num_serv
             departures[0].job.server.next_job(departures, timer.current_time)
             heapq.heappop(departures)
 
-        job_arr = j.Job(next_job_size(DISTRIBUTION_EXP, dep_rate_exp), next_arrival_inter, next_arrival_abs)
+        job_arr = j.Job(next_job_req(DISTRIBUTION_EXP, dep_rate_exp), next_arrival_abs)
         timer.sync(next_arrival_abs)
         find_next_server_jsq_n(server_list,num_sample).add_job(job_arr, departures, timer.current_time)
     return response_times
@@ -144,12 +144,12 @@ throwaway = 2000
 num_server = 50
 jsq_n = 2
 #
-# responses = simulate(arr_rate_exp, dep_rate_exp, total_jobs, n_identical, num_server)
-# responses_jsq2 = simulate(arr_rate_exp, dep_rate_exp, total_jobs, n_identical, num_server, jsq_n)
-# print(len(responses))
-# print(len(responses_jsq2))
-# print(np.mean(responses[throwaway:]))
-# print(np.mean(responses_jsq2[throwaway:]))
+responses = simulate(arr_rate_exp, dep_rate_exp, total_jobs, n_identical, num_server)
+responses_jsq2 = simulate(arr_rate_exp, dep_rate_exp, total_jobs, n_identical, num_server, jsq_n)
+print(len(responses))
+print(len(responses_jsq2))
+print(np.mean(responses[throwaway:]))
+print(np.mean(responses_jsq2[throwaway:]))
 
 # x_log2 = list(range(6,22))
 # total_jobs = 2**21
